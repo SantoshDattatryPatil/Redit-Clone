@@ -5,10 +5,7 @@ import com.santosh.redit.Redit.Clone.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -21,4 +18,9 @@ private AuthService authService;
 authService.signup(registerRequest);
 return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
 }
+    @GetMapping("accountVerification/{token}")
+    public ResponseEntity<String> verifyAccount(@PathVariable String token ){
+    authService.verifyAccount(token);
+    return  new ResponseEntity<>("Account Activated Successfully", HttpStatus.OK);
+    }
 }
